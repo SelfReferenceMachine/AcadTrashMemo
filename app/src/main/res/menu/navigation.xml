@@ -16,11 +16,4 @@
         android:icon="@drawable/ic_notifications_black_24dp"
         android:title="@string/title_notifications" />
 
-    <item
-        android:id="@+id/navigation_settings"
-        android:icon="@drawable/ic_sync_black_24dp"
-        android:title="@string/action_settings"
-        android:onClick="settings"
-        />
-
 </menu>

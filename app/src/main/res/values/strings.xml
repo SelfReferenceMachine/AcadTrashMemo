@@ -180,4 +180,9 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="title_activity_note">NoteActivity</string>
+    <string name="new_title">随手记</string>
+    <string name="new_content">内容</string>
+    <string name="new_settitle">请输入标题</string>
+    <string name="new_inputcontent">请输入内容</string>
 </resources>
