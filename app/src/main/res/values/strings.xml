@@ -185,4 +185,7 @@
     <string name="new_content">内容</string>
     <string name="new_settitle">请输入标题</string>
     <string name="new_inputcontent">请输入内容</string>
+    <string name="menu_share">这么过分一定要分享一下</string>
+    <string name="menu_newnote">新建</string>
+    <string name="menu_exit">退出</string>
 </resources>

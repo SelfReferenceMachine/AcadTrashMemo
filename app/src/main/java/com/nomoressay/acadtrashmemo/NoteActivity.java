@@ -10,6 +10,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -27,9 +29,9 @@ public class NoteActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_main);
-            listView = (ListView)findViewById(R.id.layout_listview);
-            floatingActionButton = (FloatingActionButton)findViewById(R.id.add_note);
+            setContentView(R.layout.content_note);
+            listView = (ListView)findViewById(R.id.layout_list_view);
+            floatingActionButton = (FloatingActionButton)findViewById(R.id.fab);
             layoutInflater = getLayoutInflater();
 
             dbManager = new DBManager(this);
@@ -81,4 +83,28 @@ public class NoteActivity extends AppCompatActivity {
             });
     }
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_lo,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menu_newnote:
+                Intent intent = new Intent(getApplicationContext(),AddActivity.class);
+                startActivity(intent);
+                NoteActivity.this.finish();
+                break;
+            case R.id.menu_exit:
+                NoteActivity.this.finish();
+                break;
+            default:
+                break;
+        }
+        return  true;
+
+    }
 }
