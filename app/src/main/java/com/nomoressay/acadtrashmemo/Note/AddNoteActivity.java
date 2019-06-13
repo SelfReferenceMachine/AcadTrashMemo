@@ -50,7 +50,7 @@ public class AddNoteActivity extends AppCompatActivity {
 
         @Override
         public void onBackPressed() {     //重写返回建方法，如果是属于新建则插入数据表并返回主页面，如果是修改，修改表中数据并返回主页面
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd   HH:mm");//编辑便签的时间，格式化
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm");//编辑便签的时间，格式化
             Date date = new Date(System.currentTimeMillis());
             String time = simpleDateFormat.format(date);
             String title = ed_title.getText().toString();
@@ -74,7 +74,7 @@ public class AddNoteActivity extends AppCompatActivity {
         }
 
         private void isSave(){   //写一个方法进行调用，如果是属于新建则插入数据表并返回主页面，如果是修改，修改表中数据并返回主页面
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd HH：mm");
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm");
             Date date = new Date(System.currentTimeMillis());
             String time = simpleDateFormat.format(date);
             Log.d("new_note", "isSave: "+time);

@@ -12,6 +12,7 @@ public class DBManager {
     Context context;
     SQLOpenHelper sqlOpenHelper;
     SQLiteDatabase dbManager;
+
     public DBManager(Context context){
         this.context = context;
         sqlOpenHelper = new SQLOpenHelper(context);
@@ -74,6 +75,5 @@ public class DBManager {
         dbManager.execSQL("delete from mybook where ids="+ids+"");
         dbManager.close();
     }
-
 
 }

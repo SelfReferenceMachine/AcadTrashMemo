@@ -10,10 +10,12 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.nomoressay.acadtrashmemo.Data.NoteData;
 import com.nomoressay.acadtrashmemo.DataBase.DBManager;
@@ -28,64 +30,68 @@ public class NoteActivity extends AppCompatActivity {
     ArrayList<NoteData> arrayList;
     DBManager dbManager;
 
+    private Adapter adapter;//实现列表的刷新
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.content_note);
-            listView = (ListView)findViewById(R.id.layout_list_view);
-            floatingActionButton = (FloatingActionButton)findViewById(R.id.fab);
-            layoutInflater = getLayoutInflater();
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.content_note);
+        listView = (ListView) findViewById(R.id.layout_list_view);
+        floatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
+        layoutInflater = getLayoutInflater();
 
-            dbManager = new DBManager(this);
-            arrayList = dbManager.getarray();
-            MyAdapter adapter = new MyAdapter(layoutInflater,arrayList);
-            listView.setAdapter(adapter);
+        dbManager = new DBManager(this);
+        arrayList = dbManager.getarray();
+        final MyAdapter adapter = new MyAdapter(layoutInflater, arrayList);
+        listView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
 
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {   //点击一下跳转到编辑页面（编辑页面与新建页面共用一个布局）
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Intent intent = new Intent(getApplicationContext(),AddNoteActivity.class);
-                    intent.putExtra("ids",arrayList.get(position).getIds());
-                    startActivity(intent);
-                    NoteActivity.this.finish();
-                }
-            });
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {   //点击一下跳转到编辑页面（编辑页面与新建页面共用一个布局）
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getApplicationContext(), AddNoteActivity.class);
+                intent.putExtra("ids", arrayList.get(position).getIds());
+                startActivity(intent);
+                NoteActivity.this.finish();
+            }
+        });
 
-            listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {   //长按删除
-                @Override
-                public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
-                    new AlertDialog.Builder(NoteActivity.this).setMessage("确定要删除此便签？")
-                            .setNegativeButton("取消",new DialogInterface.OnClickListener(){
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {   //长按删除
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+                new AlertDialog.Builder(NoteActivity.this).setMessage("确定要删除此便签？")
+                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
 
-                                }
-                            })
-                            .setPositiveButton("确定",new DialogInterface.OnClickListener(){
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dbManager.toDelete(arrayList.get(position).getIds());
-                                    MyAdapter myAdapter = new MyAdapter(layoutInflater,arrayList);
-                                    listView.setAdapter(myAdapter);
-                                }
-                            })
-                            .create()
-                            .show();
-                    return true;
-                }
-            });
+                            }
+                        })
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dbManager.toDelete(arrayList.get(position).getIds());
+                                MyAdapter myAdapter = new MyAdapter(layoutInflater, arrayList);
+                                listView.setAdapter(myAdapter);
+                                adapter.notifyDataSetChanged();
+                            }
+                        })
+                        .create()
+                        .show();
+                return true;
+            }
+        });
 
-            floatingActionButton.setOnClickListener(new View.OnClickListener() {   //点击悬浮按钮时，跳转到新建页面
-                @Override
-                public void onClick(View v) {
-                    Intent intent=new Intent(getApplicationContext(),AddNoteActivity.class);
-                    startActivity(intent);
-                    NoteActivity.this.finish();
-                }
-            });
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {   //点击悬浮按钮时，跳转到新建页面
+            //FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.add_note);
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), AddNoteActivity.class);
+                startActivity(intent);
+                NoteActivity.this.finish();
+            }
+        });
     }
-
-
+    
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_lo,menu);

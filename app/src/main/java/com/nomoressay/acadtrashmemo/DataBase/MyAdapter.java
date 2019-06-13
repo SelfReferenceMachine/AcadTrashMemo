@@ -53,5 +53,4 @@ public class MyAdapter extends BaseAdapter {
         class ViewHolder{
             TextView tv1,tv2;
         }
-
 }
