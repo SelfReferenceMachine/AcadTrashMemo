@@ -1,4 +1,4 @@
-package com.nomoressay.acadtrashmemo;
+package com.nomoressay.acadtrashmemo.Data;
 
 public class NoteData {
 

@@ -1,4 +1,4 @@
-package com.nomoressay.acadtrashmemo;
+package com.nomoressay.acadtrashmemo.DataBase;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,7 +7,10 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 import java.util.ArrayList;
 
-    public class MyAdapter extends BaseAdapter {
+import com.nomoressay.acadtrashmemo.Data.NoteData;
+import com.nomoressay.acadtrashmemo.R;
+
+public class MyAdapter extends BaseAdapter {
 
         LayoutInflater inflater;
         ArrayList<NoteData> array;

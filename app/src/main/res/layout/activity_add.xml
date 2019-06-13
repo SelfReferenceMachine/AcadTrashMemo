@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".AddActivity">
+    android:fitsSystemWindows="true">
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -18,7 +15,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_margin="10dp"
-                >
+            >
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -26,16 +23,16 @@
                     android:text="@string/new_title"
                     android:textSize="24dp"
                     android:textColor="@color/colorPrimaryDark"
-                    />
-
+                />
                 <EditText
                     android:id="@+id/title"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="4"
-                    android:ems="10"
                     android:hint="@string/new_settitle"
-                    android:textSize="24dp" />
+                    android:ems="10"
+                    android:textSize="24dp"
+                />
             </LinearLayout>
 
             <LinearLayout
@@ -57,15 +54,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="10dp">
-
                 <EditText
                     android:id="@+id/content"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@null"
                     android:gravity="top"
                     android:hint="@string/new_inputcontent"
-                    android:textSize="24dp" />
+                    android:textSize="24dp"
+                    android:background="@null"/>
             </LinearLayout>
         </LinearLayout>
         <android.support.design.widget.FloatingActionButton
@@ -74,8 +70,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="15dp"
-            android:src="@drawable/ic_sync_black_24dp"
-            />
+            android:backgroundTint="@color/colorPrimary"
+            android:src="@android:drawable/ic_menu_save"
+        />
     </FrameLayout>
-
 </LinearLayout>

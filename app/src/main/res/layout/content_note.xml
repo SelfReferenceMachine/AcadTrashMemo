@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".NoteActivity"
+    tools:context=".Note.NoteActivity"
     tools:showIn="@layout/activity_note">
 
     <FrameLayout
@@ -16,6 +16,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         </ListView>
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/finish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="15dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:src="@android:drawable/ic_menu_save"
+            />
     </FrameLayout>
 
 </android.support.constraint.ConstraintLayout>

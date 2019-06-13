@@ -1,4 +1,4 @@
-package com.nomoressay.acadtrashmemo;
+package com.nomoressay.acadtrashmemo.Note;
 
 import android.os.Bundle;
 import android.view.View;
@@ -14,7 +14,11 @@ import android.widget.EditText;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 
-public class AddActivity extends AppCompatActivity {
+import com.nomoressay.acadtrashmemo.Data.NoteData;
+import com.nomoressay.acadtrashmemo.DataBase.DBManager;
+import com.nomoressay.acadtrashmemo.R;
+
+public class AddNoteActivity extends AppCompatActivity {
         EditText ed_title;
         EditText ed_content;
         FloatingActionButton floatingActionButton;
@@ -54,17 +58,17 @@ public class AddActivity extends AppCompatActivity {
             if(ids!=0){
                 noteData=new NoteData(title,ids, content, time);
                 dbManager.toUpdate(noteData);
-                Intent intent=new Intent(AddActivity.this,NoteActivity.class);
+                Intent intent=new Intent(AddNoteActivity.this,NoteActivity.class);
                 startActivity(intent);
-                AddActivity.this.finish();
+                AddNoteActivity.this.finish();
             }
             //新建日记
             else{
                 noteData=new NoteData(title,content,time);
                 dbManager.toInsert(noteData);
-                Intent intent=new Intent(AddActivity.this,NoteActivity.class);
+                Intent intent=new Intent(AddNoteActivity.this,NoteActivity.class);
                 startActivity(intent);
-                AddActivity.this.finish();
+                AddNoteActivity.this.finish();
             }
 
         }
@@ -79,17 +83,17 @@ public class AddActivity extends AppCompatActivity {
             if(ids!=0){
                 noteData=new NoteData(title,ids, content, time);
                 dbManager.toUpdate(noteData);
-                Intent intent=new Intent(AddActivity.this,NoteActivity.class);
+                Intent intent=new Intent(AddNoteActivity.this,NoteActivity.class);
                 startActivity(intent);
-                AddActivity.this.finish();
+                AddNoteActivity.this.finish();
             }
             //新建日记
             else{
                 noteData=new NoteData(title,content,time);
                 dbManager.toInsert(noteData);
-                Intent intent=new Intent(AddActivity.this,NoteActivity.class);
+                Intent intent=new Intent(AddNoteActivity.this,NoteActivity.class);
                 startActivity(intent);
-                AddActivity.this.finish();
+                AddNoteActivity.this.finish();
             }
         }
 

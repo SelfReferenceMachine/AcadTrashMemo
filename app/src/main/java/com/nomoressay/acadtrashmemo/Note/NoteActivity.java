@@ -1,14 +1,11 @@
-package com.nomoressay.acadtrashmemo;
+package com.nomoressay.acadtrashmemo.Note;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,6 +14,11 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+
+import com.nomoressay.acadtrashmemo.Data.NoteData;
+import com.nomoressay.acadtrashmemo.DataBase.DBManager;
+import com.nomoressay.acadtrashmemo.DataBase.MyAdapter;
+import com.nomoressay.acadtrashmemo.R;
 
 public class NoteActivity extends AppCompatActivity {
 
@@ -42,7 +44,7 @@ public class NoteActivity extends AppCompatActivity {
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {   //点击一下跳转到编辑页面（编辑页面与新建页面共用一个布局）
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Intent intent = new Intent(getApplicationContext(),AddActivity.class);
+                    Intent intent = new Intent(getApplicationContext(),AddNoteActivity.class);
                     intent.putExtra("ids",arrayList.get(position).getIds());
                     startActivity(intent);
                     NoteActivity.this.finish();
@@ -76,7 +78,7 @@ public class NoteActivity extends AppCompatActivity {
             floatingActionButton.setOnClickListener(new View.OnClickListener() {   //点击悬浮按钮时，跳转到新建页面
                 @Override
                 public void onClick(View v) {
-                    Intent intent=new Intent(getApplicationContext(),AddActivity.class);
+                    Intent intent=new Intent(getApplicationContext(),AddNoteActivity.class);
                     startActivity(intent);
                     NoteActivity.this.finish();
                 }
@@ -94,7 +96,7 @@ public class NoteActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.menu_newnote:
-                Intent intent = new Intent(getApplicationContext(),AddActivity.class);
+                Intent intent = new Intent(getApplicationContext(),AddNoteActivity.class);
                 startActivity(intent);
                 NoteActivity.this.finish();
                 break;
