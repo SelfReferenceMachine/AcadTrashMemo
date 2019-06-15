@@ -36,7 +36,7 @@ public class AddNoteActivity extends AppCompatActivity {
             Intent intent = this.getIntent();
             ids = intent.getIntExtra("ids",0);
             if (ids != 0){
-                noteData = dbManager.getTiandCon(ids);
+                noteData = dbManager.getTiCon(ids);
                 ed_title.setText(noteData.getTitle());
                 ed_content.setText(noteData.getContent());
             }
@@ -106,12 +106,10 @@ public class AddNoteActivity extends AppCompatActivity {
         @Override
         public boolean onOptionsItemSelected(MenuItem item) {
             switch (item.getItemId()){
-                case R.id.new_share :  //分享功能
+                case R.id.new_share:
                     Intent intent=new Intent(Intent.ACTION_SEND);
                     intent.setType("text/plain");
-                    intent.putExtra(Intent.EXTRA_TEXT,//分享类型设置为文本型
-                            "标题："+ed_title.getText().toString()+"    " +
-                                    "内容："+ed_content.getText().toString());
+                    intent.putExtra(Intent.EXTRA_TEXT,"标题："+ed_title.getText().toString()+""+"内容："+ed_content.getText().toString());
                     startActivity(intent);
                     break;
                 default:

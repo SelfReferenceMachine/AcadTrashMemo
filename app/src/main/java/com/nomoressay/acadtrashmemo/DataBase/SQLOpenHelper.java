@@ -12,11 +12,7 @@ public class SQLOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table mybook(" +                  //表名设置为mybook
-                "ids integer PRIMARY KEY autoincrement," +   //设置id自增
-                "title text," +                              //设置标题为文本类型
-                "content text," +                            //设置内容为文本类型
-                "times text)");                              //设置时间为文本类型
+        db.execSQL("create table note("+"ids integer PRIMARY KEY autoincrement,"+"title text,"+"content text,"+"times text)");
     }
 
     @Override
