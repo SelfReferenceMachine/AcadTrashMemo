@@ -28,7 +28,7 @@ public class DBManager {
             int id = cursor.getInt(cursor.getColumnIndex("ids"));
             String title = cursor.getString(cursor.getColumnIndex("title"));
             String times = cursor.getString(cursor.getColumnIndex("times"));
-            NoteData data = new NoteData(id, title, times);
+            NoteData data = new NoteData(id,title,times);
             arr.add(data);
             cursor.moveToNext();
         }
@@ -40,8 +40,8 @@ public class DBManager {
     }
 
     public NoteData getTiCon(int id){
-        dbManager = sqlOpenHelper.getWritableDatabase();
-        Cursor cursor = dbManager.rawQuery("select title,content from note where ids='"+id+"'", null);
+        dbManager=sqlOpenHelper.getWritableDatabase();
+        Cursor cursor=dbManager.rawQuery("select title,content from note where ids='"+id+"'", null);
         cursor.moveToFirst();
         String title = cursor.getString(cursor.getColumnIndex("title"));
         String content = cursor.getString(cursor.getColumnIndex("content"));
@@ -51,19 +51,19 @@ public class DBManager {
     }
 
     public void toUpdate(NoteData data){
-        dbManager = sqlOpenHelper.getWritableDatabase();
+        dbManager=sqlOpenHelper.getWritableDatabase();
         dbManager.execSQL("update note set title='"+data.getTitle()+"',times='"+data.getTimes()+"',content='"+data.getContent()+"'where ids='"+ data.getIds()+"'");
         dbManager.close();
     }
 
     public void toInsert(NoteData data){
-        dbManager = sqlOpenHelper.getWritableDatabase();
+        dbManager=sqlOpenHelper.getWritableDatabase();
         dbManager.execSQL("insert into note(title,content,times)values('"+data.getTitle()+"','"+data.getContent()+"','"+data.getTimes()+"')");
         sqlOpenHelper.close();
     }
 
     public void toDelete(int ids){
-        dbManager  = sqlOpenHelper.getWritableDatabase();
+        dbManager=sqlOpenHelper.getWritableDatabase();
         dbManager.execSQL("delete from note where ids="+ids+"");
         dbManager.close();
     }

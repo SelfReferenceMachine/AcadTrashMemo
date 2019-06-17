@@ -12,7 +12,7 @@ public class SQLOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table note("+"ids integer PRIMARY KEY autoincrement,"+"title text,"+"content text,"+"times text)");
+        db.execSQL("create table note ("+"ids integer PRIMARY KEY autoincrement,"+"title text,"+"content text,"+"times text)");
     }
 
     @Override

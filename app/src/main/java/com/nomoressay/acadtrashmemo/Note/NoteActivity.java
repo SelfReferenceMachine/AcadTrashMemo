@@ -89,28 +89,4 @@ public class NoteActivity extends AppCompatActivity {
             }
         });
     }
-    
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_lo,menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.menu_newnote:
-                Intent intent = new Intent(getApplicationContext(),AddNoteActivity.class);
-                startActivity(intent);
-                NoteActivity.this.finish();
-                break;
-            case R.id.menu_exit:
-                NoteActivity.this.finish();
-                break;
-            default:
-                break;
-        }
-        return  true;
-
-    }
 }
