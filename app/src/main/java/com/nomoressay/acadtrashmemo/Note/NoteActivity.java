@@ -7,15 +7,11 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import com.nomoressay.acadtrashmemo.Data.NoteData;
 import com.nomoressay.acadtrashmemo.DataBase.DBManager;
@@ -43,7 +39,6 @@ public class NoteActivity extends AppCompatActivity {
         arrayList = dbManager.getarray();
         final MyAdapter adapter = new MyAdapter(layoutInflater, arrayList);
         listView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -58,13 +53,7 @@ public class NoteActivity extends AppCompatActivity {
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
-                new AlertDialog.Builder(NoteActivity.this).setMessage("确定要删除吗？")
-                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        })
+                AlertDialog.Builder builder = new AlertDialog.Builder(NoteActivity.this).setMessage("确定要删除吗？")
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -73,12 +62,14 @@ public class NoteActivity extends AppCompatActivity {
                                 listView.setAdapter(myAdapter);
                                 adapter.notifyDataSetChanged();
                             }
-                        })
-                        .create()
-                        .show();
+                        }).setNegativeButton("取消", null);
+                        builder.create().show();
+
                 return true;
             }
         });
+
+
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,4 +80,5 @@ public class NoteActivity extends AppCompatActivity {
             }
         });
     }
+
 }

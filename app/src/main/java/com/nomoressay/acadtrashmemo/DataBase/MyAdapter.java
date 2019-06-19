@@ -1,5 +1,6 @@
 package com.nomoressay.acadtrashmemo.DataBase;
 
+import android.icu.text.AlphabeticIndex;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import com.nomoressay.acadtrashmemo.Data.NoteData;
+import com.nomoressay.acadtrashmemo.Note.NoteActivity;
 import com.nomoressay.acadtrashmemo.R;
 
 public class MyAdapter extends BaseAdapter {
@@ -15,9 +17,12 @@ public class MyAdapter extends BaseAdapter {
         LayoutInflater inflater;
         ArrayList<NoteData> array;
 
-        public MyAdapter(LayoutInflater inf, ArrayList<NoteData> arry){
+
+        public MyAdapter(LayoutInflater inf, ArrayList<NoteData> array){
             this.inflater=inf;
-            this.array=arry;
+            this.array=array;
+
+
         }
 
         @Override
@@ -34,10 +39,18 @@ public class MyAdapter extends BaseAdapter {
         public long getItemId(int position) {
             return position;
         }
-        //判断是修改还是新建，同时对切出窗口后的内容保存
+
+        public void refreshDatas(ArrayList<NoteData> mdata) {
+            array.clear();
+            this.array = mdata;
+            notifyDataSetChanged();
+        }
+
+
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             ViewHolder vh;
+
             if(convertView==null){
                 vh=new ViewHolder();
                 convertView = inflater.inflate(R.layout.list_view,null);
@@ -50,6 +63,7 @@ public class MyAdapter extends BaseAdapter {
             vh.tv2.setText(array.get(position).getTimes());
             return convertView;
         }
+
         class ViewHolder{
             TextView tv1,tv2;
         }

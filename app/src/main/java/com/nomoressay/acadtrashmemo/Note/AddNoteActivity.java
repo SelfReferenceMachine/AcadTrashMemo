@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -46,6 +45,7 @@ public class AddNoteActivity extends AppCompatActivity {
                     isSave();
                 }
             });
+
         }
 
         @Override
@@ -62,7 +62,6 @@ public class AddNoteActivity extends AppCompatActivity {
                 startActivity(intent);
                 AddNoteActivity.this.finish();
             }
-            //新建日记
             else{
                 noteData=new NoteData(title,content,time);
                 dbManager.toInsert(noteData);
@@ -86,7 +85,6 @@ public class AddNoteActivity extends AppCompatActivity {
                 startActivity(intent);
                 AddNoteActivity.this.finish();
             }
-            //新建日记
             else{
                 noteData=new NoteData(title,content,time);
                 dbManager.toInsert(noteData);

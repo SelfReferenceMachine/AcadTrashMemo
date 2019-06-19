@@ -1,68 +1,89 @@
 package com.nomoressay.acadtrashmemo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.TextView;
+import android.view.View;
 
-public class MainPage extends FragmentActivity {
+import com.nomoressay.acadtrashmemo.Note.NoteActivity;
 
-    private Fragment mFragments[];
-    private RadioGroup radioGroup;
-    private FragmentManager fragmentManager;
-    private FragmentTransaction fragmentTransaction;
-    private RadioButton rbtHome,rbtFunc,rbtSetting;
-    private TextView mTextMessage;
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+public class MainPage extends AppCompatActivity {
 
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
-                    fragmentTransaction.show(mFragments[0]).commit();
-                    return true;
-                case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
-                    fragmentTransaction.show(mFragments[1]).commit();
-                    return true;
-                case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
-                    fragmentTransaction.show(mFragments[2]).commit();
-                    return true;
-            }
-            return false;
-        }
-    };
+
+    private BottomNavigationView mBv;
+    private ViewPager mVp;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
-
-
-        mFragments = new Fragment[3];
-        fragmentManager = getSupportFragmentManager();
-        mFragments[0] = fragmentManager.findFragmentById(R.id.navigation_home);
-        mFragments[1] = fragmentManager.findFragmentById(R.id.navigation_dashboard);
-        mFragments[2] = fragmentManager.findFragmentById(R.id.navigation_notifications);
-        fragmentTransaction = fragmentManager.beginTransaction().hide(mFragments[0]).hide(mFragments[1]).hide(mFragments[2]);
-
-        fragmentTransaction.show(mFragments[0]).commit();
-
-        mTextMessage = (TextView) findViewById(R.id.message);
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        initView();
     }
 
+
+    private void initView(){
+        mBv = (BottomNavigationView)findViewById(R.id.navigation);
+        mVp = (ViewPager) findViewById(R.id.vp);
+
+        mBv.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.navigation_home:
+                    mVp.setCurrentItem(0);
+                    return true;
+                case R.id.navigation_dashboard:
+                    //View listView = getActivity().findViewById(R.id.list);
+                    //Intent intent = new Intent();
+                    //intent.setClass(MainPage.this,NoteActivity.class);
+                    //startActivity(intent);
+                    mVp.setCurrentItem(1);
+                    return true;
+                case R.id.navigation_notifications:
+                    mVp.setCurrentItem(2);
+                    return true;
+            }
+            return false;
+        }
+    });
+
+        setupViewPage(mVp);
+
+
+        mVp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                mBv.getMenu().getItem(position).setChecked(true);
+            }
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+    }
+
+
+    private void setupViewPage(ViewPager viewPager){
+        BottomViewAdapter adapter = new BottomViewAdapter(getSupportFragmentManager());
+        adapter.addFragment(new HomeFragment());
+        adapter.addFragment(new DashFragment());
+        adapter.addFragment(new SettingFragment());
+        viewPager.setAdapter(adapter);
+    }
+
+
 }
+
