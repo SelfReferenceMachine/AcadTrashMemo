@@ -13,7 +13,9 @@ import com.nomoressay.acadtrashmemo.Note.NoteActivity;
 import com.nomoressay.acadtrashmemo.R;
 
 public class MyAdapter extends BaseAdapter {
-
+/*
+有参考第三方控件，对第三方控件中无法实现列表刷新功能进行改进但失败了
+ */
         LayoutInflater inflater;
         ArrayList<NoteData> array;
 
@@ -21,8 +23,6 @@ public class MyAdapter extends BaseAdapter {
         public MyAdapter(LayoutInflater inf, ArrayList<NoteData> array){
             this.inflater=inf;
             this.array=array;
-
-
         }
 
         @Override

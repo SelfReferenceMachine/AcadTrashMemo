@@ -24,15 +24,20 @@ public class AddNoteActivity extends AppCompatActivity {
         DBManager dbManager;
         NoteData noteData;
         int ids;
+
         @Override
         protected void onCreate(@Nullable Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
+
             setContentView(R.layout.activity_add);
             ed_title = (EditText)findViewById(R.id.title);
             ed_content = (EditText)findViewById(R.id.content);
+
             floatingActionButton = (FloatingActionButton)findViewById(R.id.finish);
+
             dbManager = new DBManager(this);
             Intent intent = this.getIntent();
+
             ids = intent.getIntExtra("ids",0);
             if (ids != 0){
                 noteData = dbManager.getTiCon(ids);

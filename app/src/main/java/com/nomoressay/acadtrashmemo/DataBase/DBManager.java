@@ -1,12 +1,18 @@
 package com.nomoressay.acadtrashmemo.DataBase;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
+
 import java.util.ArrayList;
 
+import com.nomoressay.acadtrashmemo.DashFragment;
 import com.nomoressay.acadtrashmemo.Data.NoteData;
-
+/*
+有参考外部控件利用DBManager和liDBManager实现Note数据记录
+ */
 
 public class DBManager {
     Context context;
@@ -21,6 +27,7 @@ public class DBManager {
     public ArrayList<NoteData> getarray(){
         ArrayList<NoteData> arr = new ArrayList<NoteData>();
         ArrayList<NoteData> arr1 = new ArrayList<NoteData>();
+
         dbManager = sqlOpenHelper.getWritableDatabase();
         Cursor cursor = dbManager.rawQuery("select ids,title,times from note",null);
         cursor.moveToFirst();
@@ -67,4 +74,5 @@ public class DBManager {
         dbManager.execSQL("delete from note where ids="+ids+"");
         dbManager.close();
     }
+
 }
