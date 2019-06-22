@@ -17,7 +17,6 @@ import java.util.ArrayList;
 public class DashFragment extends Fragment {
 
     Button btn_editor;
-    ArrayList<NoteData> arrayList;
 
 
     /*

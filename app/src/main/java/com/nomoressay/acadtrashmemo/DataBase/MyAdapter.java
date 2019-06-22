@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import java.util.ArrayList;
 
@@ -47,7 +48,8 @@ public class MyAdapter extends BaseAdapter {
         }
 
 
-        @Override
+
+    @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             ViewHolder vh;
 
@@ -57,8 +59,9 @@ public class MyAdapter extends BaseAdapter {
                 vh.tv1=(TextView) convertView.findViewById(R.id.list_title);
                 vh.tv2=(TextView) convertView.findViewById(R.id.list_time);
                 convertView.setTag(vh);
+            }else {
+                vh = (ViewHolder) convertView.getTag();
             }
-            vh=(ViewHolder) convertView.getTag();
             vh.tv1.setText(array.get(position).getTitle());
             vh.tv2.setText(array.get(position).getTimes());
             return convertView;

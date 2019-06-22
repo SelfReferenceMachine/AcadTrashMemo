@@ -10,7 +10,9 @@ import com.nomoressay.acadtrashmemo.DashFragment;
 import com.nomoressay.acadtrashmemo.Data.NoteData;
 
 public class liDBManager{
-
+/*
+想要实现fragment的数据列表读取，参考原来的方法打包数据，但是没能显示于是作罢
+ */
     Context context;
     SQLOpenHelper sqlOpenHelper;
     SQLiteDatabase dbManager1;
